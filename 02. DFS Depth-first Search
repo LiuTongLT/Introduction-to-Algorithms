@@ -1,2 +1,6 @@
 /******************************************************************************************
+DFS: 
+1. Pick a node and push all of its adjacent nodes into a stack
+2. Pop a node to select one node to check and push all of its adjacent nodes into the stack
+3. Repeat this process until the stack is empty or get the target node
 *******************************************************************************************/
