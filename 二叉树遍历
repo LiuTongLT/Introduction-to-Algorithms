@@ -1,12 +1,13 @@
+/***************************************************************************************************/
 先序遍历：考察到一个点时，立即输出此节点的值，然后继续遍历左右子树
   递归先序遍历：
-  public static void recursionPreorderTraversal(TreeNode root)
+  public static void recursionPreorderTraverse(TreeNode root)
   {
       if(root!=null)
       {
           System.out.println(root.val);
-          recursionPreorderTraversal(root.left);
-          recursionPreorderTraversal(root.right);
+          recursionPreorderTraverse(root.left);
+          recursionPreorderTraverse(root.right);
       }
   }
   
@@ -31,3 +32,86 @@
           }
       }
   }
+  
+  
+/***************************************************************************************************/
+中序遍历：考察到一个节点时，先将其暂存，遍历完左子树后，再将其值输出，然后遍历右子树
+  递归中序遍历：
+  public static void recursionMiddleorderTraverse(TreeNode root)
+  {
+      if(root!=null)
+      {
+          recursionMiddleorderTraverse(root.left);
+          System.out.println(root.val);
+          recursionMiddleorderTraverse(root.right);
+      }
+  }
+  
+  非递归中序遍历：
+  public static void middleorderTraverse(TreeNode root)
+  {
+      Stack<TreeNode> treeNodeStack = new Stack<TreeNode>();
+      TreeNode node = root;
+      
+      while(node!=null || !treeNodeStack.isEmpty())
+      {
+          while(node!=null)
+          {
+              treeNodeStack.push(node);
+              node = node.left;
+          }
+          
+          if(!treeNodeStack.isEmpty())
+          {
+              node = treeNodeStack.pop();
+              System.out.println(node.val);
+              node = node.right;
+          }
+      }
+  }
+
+
+/***************************************************************************************************/
+后序遍历：考察到一个节点，先暂存，遍历完左右子树后，再将其值输出
+  递归后序遍历：
+  public static void recursionPostorderTravese(TreeNode root)
+  {
+      if(root!=null)
+      {
+          recursionPostorderTraverse(root.left);
+          recursionPostorderTraverse(root.right);
+          System.out.println(root.val);
+      }
+  }
+  
+  非递归后序排列：
+  public static void postorderTraverse(TreeNode root)
+  {
+      Stack<TreeNode> treeNodeStack = Stack<TreeNode>();
+      TreeNode node = root;
+      TreeNode lastVisit = root;
+      
+      while(node!=null || !treeNodeStack.isEmpty())
+      {
+          while(node!=null)
+          {
+              treeNodeStack.push(node);
+              node = node.left;
+          }
+          
+          node = treeNodeStack.peek();
+          
+          if(node.right == null || node.right == lastVisit)
+          {
+              System.out.println(node.val);
+              treeNodeStack.pop();
+              lastVisit = node;
+              node = null;
+          }
+          else
+          {
+              node = node.right;
+          }
+      }
+  }
+
