@@ -1,0 +1,33 @@
+先序遍历：考察到一个点时，立即输出此节点的值，然后继续遍历左右子树
+  递归先序遍历：
+  public static void recursionPreorderTraversal(TreeNode root)
+  {
+      if(root!=null)
+      {
+          System.out.println(root.val);
+          recursionPreorderTraversal(root.left);
+          recursionPreorderTraversal(root.right);
+      }
+  }
+  
+  非递归先序遍历：使用栈暂存
+  public static void preorderTraversal(TreeNode root)
+  {
+      Stack<TreeNode> treeNodeStack = new Stack<TreeNode>();
+      TreeNode node = root;
+      while(node!=null || !treeNodeStack.isEmpty())
+      {
+          while(node!=null)
+          {
+              System.out.println(node.val);
+              treeNodeStack.push(node);
+              node = node.left;
+          }
+          
+          if(treeNodeStack.isEmpty())
+          {
+              node = treeNodeStack.pop();
+              node = node.right;
+          }
+      }
+  }
